@@ -12,7 +12,7 @@ public class ArrayList<E> {
      */
     private int size;
 
-    private final int DEFAULT_CAPACITY = 10;
+    private static final int DEFAULT_CAPACITY = 10;
 
     /**
      * 功能描述: TODO 数组大小
@@ -22,7 +22,7 @@ public class ArrayList<E> {
     private Object elementData[];
 
     public ArrayList (){
-        new ArrayList(DEFAULT_CAPACITY);
+        this(DEFAULT_CAPACITY);
     }
 
     public ArrayList (int initialCapacity){
@@ -37,14 +37,16 @@ public class ArrayList<E> {
     public Boolean add(E e){
         // 是否需要扩容
         ensureCapacityInternal(size + 1);
-        elementData[size++] = e;
+        this.elementData[size++] = e;
         return true;
     }
 
+    /**
+     * 功能描述: TODO 添加元素到指定位置
+     * @see ArrayList
+     */
     public void add(int index, E e){
-        if (index < 0 || index > size){
-            throw new IndexOutOfBoundsException("index:" + index + ", size：" + size);
-        }
+        rangeCheckForAdd(index);
         ensureCapacityInternal(size + 1);
         for (int i = size; index <= i ; i--){
             elementData[i] = elementData[i -1];
@@ -53,28 +55,49 @@ public class ArrayList<E> {
         size++;
     }
 
-    public E remove(E e){
-        return null;
+    public Boolean remove(E e){
+        if (e == null){
+            for (int index = 0; index < size; index++){
+                if (elementData[index] == null){
+                    removeIndex(index);
+                    return true;
+                }
+            }
+        }  else {
+            for (int index = 0; index < size; index++){
+                if (e.equals(elementData[index])){
+                    removeIndex(index);
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     public E removeIndex(int index){
-
-        return null;
+        rangeCheck(index);
+        E old = (E)elementData[index];
+        for (int i = index; index < size; index++){
+            elementData[i] = elementData[i + 1];
+        }
+        size--;
+        return old;
     }
 
-    public E set(int index, E e){
-
-        return null;
+    public Boolean set(int index, E e){
+        rangeCheck(index);
+        elementData[index] = e;
+        return true;
     }
 
     public E get(int index){
-
-        return null;
+        rangeCheck(index);
+        return (E)elementData[index];
     }
 
     public Boolean isEmpty(){
 
-        return false;
+        return size == 0;
     }
 
     public int size (){
@@ -82,21 +105,54 @@ public class ArrayList<E> {
     }
 
     public int indexOf(E e){
-        if(e == null){
-            return -1;
+        if (e == null){
+            for (int index = 0; index < size; index++){
+                if (elementData[index] == null){
+                    return index;
+                }
+            }
+        }  else {
+            for (int index = 0; index < size; index++){
+                if (e.equals(elementData[index])){
+                    return index;
+                }
+            }
         }
-
         return -1;
     }
 
     public void clear(){
-
+        if (size > 0){
+            for (int i = 0; i < size; i++){
+                elementData[i] = null;
+            }
+            size = 0;
+        }
     }
 
     private void ensureCapacityInternal(int minCapacity){
         if (length < minCapacity){
             grow();
         }
+    }
+
+    /**
+     * 功能描述: TODO index 下标越界检查
+     */
+    private void rangeCheck(int index){
+        if (index < 0 || index >= size){
+            indexOutOfBoundsMsg(index);
+        }
+    }
+
+    private void rangeCheckForAdd(int index){
+        if (index < 0 || index > size){
+            indexOutOfBoundsMsg(index);
+        }
+    }
+
+    private void indexOutOfBoundsMsg (int index){
+        throw new IndexOutOfBoundsException("index:" + index + ", size：" + size);
     }
 
     /**
@@ -109,6 +165,14 @@ public class ArrayList<E> {
             newElement[i] = elementData[i];
         }
         elementData = newElement;
+    }
+
+    private void fastRemove(int index) {
+        int numMoved = size - index - 1;
+        if (numMoved > 0)
+            System.arraycopy(elementData, index+1, elementData, index,
+                    numMoved);
+        elementData[--size] = null; // clear to let GC do its work
     }
 
     @Override
