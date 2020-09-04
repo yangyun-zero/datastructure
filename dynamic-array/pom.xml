@@ -2,17 +2,14 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>datastructure</artifactId>
+        <groupId>com.yang</groupId>
+        <version>1.0</version>
+    </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.yang</groupId>
-    <artifactId>datastructure</artifactId>
-    <packaging>pom</packaging>
-    <version>1.0</version>
-    <description>数据结构学习</description>
-    <modules>
-        <module>complex-rate</module>
-        <module>dynamic-array</module>
-    </modules>
-
+    <artifactId>dynamic-array</artifactId>
+    <description>动态数组</description>
 
 </project>
