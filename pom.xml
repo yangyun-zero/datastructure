@@ -12,6 +12,7 @@
     <modules>
         <module>complex-rate</module>
         <module>dynamic-array</module>
+        <module>chain-table</module>
     </modules>
 
 

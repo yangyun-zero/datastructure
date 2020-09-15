@@ -80,7 +80,8 @@ public class ArrayList<E> {
         for (int i = index; index < size; index++){
             elementData[i] = elementData[i + 1];
         }
-        size--;
+
+        elementData[--size] = null;
         return old;
     }
 
