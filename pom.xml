@@ -13,6 +13,7 @@
         <module>complex-rate</module>
         <module>dynamic-array</module>
         <module>chain-table</module>
+        <module>commonality-model</module>
     </modules>
 
 

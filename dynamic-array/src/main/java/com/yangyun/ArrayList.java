@@ -1,11 +1,13 @@
 package com.yangyun;
 
+import com.yangyun.commonality.arrays.AbstractList;
+
 /**
  * @author yangyun
  * @Description: 动态数组
  * @date 2020/9/1 9:16
  */
-public class ArrayList<E> {
+public class ArrayList<E> extends AbstractList<E> {
 
     /**
      * 功能描述: TODO 元素个数
