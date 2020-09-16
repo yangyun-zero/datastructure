@@ -19,7 +19,7 @@ public class ChainList<E> extends AbstractList<E> {
 
     public Boolean add(E e) {
         Node<E> l = last;
-        Node<E> newNode = new Node<E>(e, null);
+        Node<E> newNode = new Node<E>(e, null, l);
         last = newNode;
         if (l == null){
             first = newNode;
@@ -47,7 +47,9 @@ public class ChainList<E> extends AbstractList<E> {
     }
 
     public E get(int index) {
-        return null;
+        checkIndex(index);
+
+        return node(index).element;
     }
 
     public Boolean isEmpty() {
@@ -68,21 +70,59 @@ public class ChainList<E> extends AbstractList<E> {
 
     @Override
     public String toString() {
+        StringBuilder sb = new StringBuilder("size = ");
+        sb.append(size);
+        sb.append(", [");
+        Node c = first;
         for (int i = 0; i < size; i++){
-
+            if (i != 0){
+                sb.append(",");
+            }
+            sb.append(c.element);
+            c = c.next;
         }
-        return super.toString();
+        sb.append("]");
+        return sb.toString();
+    }
+
+    private void checkIndex (int index){
+        if (!isElementIndex(index)){
+            throw new IndexOutOfBoundsException("Array Index Out Of Exception，Current Size : " + size + ", Target Size: " + index);
+        }
+    }
+
+    private Boolean isElementIndex(int index){
+        return index >= 0 && index < size;
+    }
+
+    Node<E> node (int index){
+        // from head loop
+        if (index < size >> 1){
+            Node<E> x = first;
+            for (int i = 0; i < index; i++){
+                x = x.next;
+            }
+            return x;
+        } else {
+            // from tail loop
+            Node<E> x = last;
+            return x;
+        }
     }
 
     private class Node<E> {
-
+        /** 存储的元素 **/
         E element;
 
+        /** 下一个节点 **/
         Node<E> next;
+        /** 上一个节点 **/
+        Node<E> prve;
 
-        public Node (E element, Node<E> next){
+        public Node (E element, Node<E> next, Node<E> prve){
             this.element = element;
             this.next = next;
+            this.prve = prve;
         }
 
         @Override

@@ -16,5 +16,6 @@ public class Main {
         list.add("c");
         System.out.println(list);
         System.out.println(list.size());
+        list.get(6);
     }
 }
