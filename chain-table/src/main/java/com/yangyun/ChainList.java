@@ -120,7 +120,8 @@ public class ChainList<E> extends AbstractList<E> {
     }
 
     public Boolean Contains(E e) {
-        return null;
+
+        return indexOf(e) >= 0;
     }
 
     @Override

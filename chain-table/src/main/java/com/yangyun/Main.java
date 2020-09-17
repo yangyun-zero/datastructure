@@ -24,8 +24,7 @@ public class Main {
         list.add("e");
 
 //        list.remove("e");
-        list.clear();
-        System.out.println(list);
+        System.out.println(list.Contains("e"));
 
 //        String s = list.removeIndex(1);
 //        System.out.println(s);
