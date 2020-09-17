@@ -87,10 +87,11 @@ public class ArrayList<E> extends AbstractList<E> {
         return old;
     }
 
-    public Boolean set(int index, E e){
+    public E set(int index, E e){
         rangeCheck(index);
+        E old = (E)elementData[index];
         elementData[index] = e;
-        return true;
+        return old;
     }
 
     public E get(int index){
@@ -131,6 +132,23 @@ public class ArrayList<E> extends AbstractList<E> {
             }
             size = 0;
         }
+    }
+
+    public Boolean Contains(E e) {
+        if (e == null){
+            for (int i = 0; i < size; i++){
+                if (elementData[i] == null){
+                    return true;
+                }
+            }
+        } else {
+            for (int i = 0; i < size; i++){
+                if (e.equals(elementData[i])){
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     private void ensureCapacityInternal(int minCapacity){

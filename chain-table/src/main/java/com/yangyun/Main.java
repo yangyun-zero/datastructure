@@ -2,6 +2,8 @@ package com.yangyun;
 
 import com.yangyun.commonality.arrays.List;
 
+import java.util.LinkedList;
+
 /**
  * @author yangyun
  * @Description:
@@ -14,8 +16,28 @@ public class Main {
         list.add("a");
         list.add("b");
         list.add("c");
+//        System.out.println(list);
+//        System.out.println(list.size());
+//        list.add(4, "e");
+//        System.out.println(list);
+
+        list.add("e");
+
+//        list.remove("e");
+        list.clear();
         System.out.println(list);
-        System.out.println(list.size());
-        list.get(6);
+
+//        String s = list.removeIndex(1);
+//        System.out.println(s);
+//        System.out.println(list);
+//        System.out.println(list.indexOf("ee"));
+
+//        LinkedList<String> s = new LinkedList<String>();
+//        s.add("a");
+//        s.add("b");
+//        s.add("c");
+//        System.out.println(s);
+//        s.add(0, "e");
+//        System.out.println(s);
     }
 }
