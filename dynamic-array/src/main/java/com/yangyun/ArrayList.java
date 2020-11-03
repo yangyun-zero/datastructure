@@ -36,7 +36,7 @@ public class ArrayList<E> extends AbstractList<E> {
      * 功能描述: TODO 添加元素
      * @see java.util.ArrayList#add
      */
-    public Boolean add(E e){
+    public Boolean add(E e){ // O(1)
         // 是否需要扩容
         ensureCapacityInternal(size + 1);
         this.elementData[size++] = e;
@@ -48,6 +48,14 @@ public class ArrayList<E> extends AbstractList<E> {
      * @see ArrayList
      */
     public void add(int index, E e){
+        /*
+         * 时间复杂度和 index 有关
+         * 最好：当添加元素在 size 的时候，为 O(1)
+         * 最差：当添加元素在 0 的时候，需要移动所有元素，为 O(n)
+         * 平均：也就是是当添加元素出现在 0 - size 时，可以考虑到他们出现的几率是相同的
+         *      所以，(1+2+...+n) / n，最终结果就是O(n/2) 也即使 O(n)
+         *
+         */
         rangeCheckForAdd(index);
         ensureCapacityInternal(size + 1);
         for (int i = size; index <= i ; i--){
